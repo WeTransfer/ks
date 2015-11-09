@@ -19,7 +19,7 @@ Jeweler::Tasks.new do |gem|
   gem.homepage = "http://github.com/wetransfer/ks"
   gem.license = "MIT"
   gem.description = %Q{Keyword-initialized Structs}
-  gem.description = %Q{Keyword-initialized Structs}
+  gem.summary = %Q{Keyword-initialized Structs}
   gem.email = "me@julik.nl"
   gem.authors = ["Julik Tarkhanov"]
   # dependencies defined in Gemfile
