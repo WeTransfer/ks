@@ -27,4 +27,15 @@ describe 'Ks' do
       expect(classes.uniq.length).to eq(1)
     end
   end
+
+  describe '.allowing_unknown' do
+    it 'allocates a Struct class that can be initialized with keywords' do
+      k = Ks.allowing_unknown(:foo, :bar)
+      item = k.new(foo: 1, bar: 2, tang: "knip")
+      expect(item.foo).to eq(1)
+      expect(item.bar).to eq(2)
+      expect(item.class.ancestors).to include(Struct)
+      expect(item.members).to eq(%i[foo bar])
+    end
+  end
 end
