@@ -17,7 +17,7 @@ describe 'Ks' do
       k = Ks.strict(:foo, :bar)
       expect do
         k.new(foo: 1)
-      end.to raise_error(ArgumentError, 'missing keyword: bar')
+      end.to raise_error(ArgumentError, 'missing keyword: :bar')
     end
 
     it 'caches the created Struct ancestor even when using multiple threads' do
