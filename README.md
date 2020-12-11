@@ -1,3 +1,5 @@
+**Notice: this library is no longer maintained as there is a builtin feature for this - we recommend you use the new syntax of `Stuct.new(:name, :surname, keyword_init: true)` available in the newer Ruby versions.**
+
 # ks - a generator for keyworded Structs
 
 Normally when you create a Struct in Ruby you get a positional arguments
