@@ -14,10 +14,16 @@ describe 'Ks' do
     end
 
     it 'raises when keyword arguments are omitted' do
+      expected_message = if RUBY_VERSION < '2.7'
+        'missing keyword: bar'
+      else
+        'missing keyword: :bar'
+      end
+
       k = Ks.strict(:foo, :bar)
       expect do
         k.new(foo: 1)
-      end.to raise_error(ArgumentError, 'missing keyword: bar')
+      end.to raise_error(ArgumentError, expected_message)
     end
 
     it 'caches the created Struct ancestor even when using multiple threads' do

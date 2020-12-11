@@ -30,7 +30,14 @@ module Ks
     @@caching_mutex.synchronize do
       return @@predefined_structs[k] if @@predefined_structs[k]
 
-      struct_ancestor = Struct.new(*members)
+      struct_ancestor = Struct.new(*members) do
+        def self.new(*args, **kwargs)
+          instance = allocate
+          instance.send(:initialize, *args, **kwargs)
+          instance
+        end
+      end
+
       predefined = Class.new(struct_ancestor) do
         class_eval <<-METHOD, __FILE__, __LINE__ + 1
           def initialize(#{members.map { |a| "#{a}:" }.join(', ')}) # def initialize(bar:, baz:)
@@ -75,7 +82,14 @@ module Ks
     @@caching_mutex.synchronize do
       return @@predefined_structs[k] if @@predefined_structs[k]
 
-      struct_ancestor = Struct.new(*members)
+      struct_ancestor = Struct.new(*members) do
+        def self.new(*args, **kwargs)
+          instance = allocate
+          instance.send(:initialize, *args, **kwargs)
+          instance
+        end
+      end
+
       predefined = Class.new(struct_ancestor) do
         class_eval <<-METHOD, __FILE__, __LINE__ + 1
           def initialize(#{members.map { |a| "#{a}:" }.join(', ')}, **) # def initialize(bar:, baz:, **)
